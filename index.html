@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TT Eats – Restaurants in Trinidad & Tobago</title>
+<meta name="theme-color" content="#0a0a0a">
+<link rel="manifest" href="manifest.json"><link rel="icon" href="icons/icon.svg">
+<link rel="stylesheet" href="style.css">
+</head><body>
+<div id="offline" hidden>You're offline. Showing the restaurant list saved on this device. Comments sync when you're back online.</div>
+<header><h1>TT Eats</h1><p>Find where to eat in Trinidad &amp; Tobago</p>
+<form id="sf"><input id="q" type="search" placeholder="Search a dish or restaurant name" aria-label="Search restaurants"><button class="btn">Search</button></form></header>
+<section class="filters"><button type="button" id="near" class="btn">Near me</button>
+<select id="food" aria-label="Food type"><option value="">All food types</option></select>
+<select id="area" aria-label="Location"><option value="">All locations</option></select>
+<select id="sort" aria-label="Sort"><option value="name">A–Z</option><option value="near" disabled>Nearest</option><option value="rating">Top rated</option></select>
+<label class="chk"><input type="checkbox" id="open"> Open now</label>
+</section>
+<p id="count" role="status"></p>
+<main id="list"></main>
+<dialog id="dlg"><button class="x" id="close" aria-label="Close">×</button><div id="detail"></div></dialog>
+<footer>Restaurant data © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap contributors</a>. Missing a restaurant? <a href="https://www.openstreetmap.org/note/new#map=10/10.5/-61.3" target="_blank" rel="noopener">Tell OpenStreetMap</a>. If a place or its hours, phone or social links are missing, add them at openstreetmap.org and they will appear here within about a week. Ratings and comments are from TT Eats visitors. Always call ahead to confirm hours.</footer>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js" defer></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js" defer></script>
+<script src="config.js" defer></script>
+<script src="app.js" defer></script>
+</body></html>
