@@ -23,3 +23,4 @@ form{display:grid;gap:.5rem}#cf{margin:.8rem 0}.cm{border-top:1px solid var(--l)
 button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #fff;outline-offset:2px}
 #offline,.err{background:var(--r);color:#fff;padding:.5rem 1rem;font-size:.9rem}footer{padding:1.5rem 1rem;color:var(--m);font-size:.85rem;max-width:70ch}
 .dist{color:var(--r);font-weight:600}#more{grid-column:1/-1;justify-self:center}footer a{color:var(--t)}
+dialog a:not(.btn){color:#ff7b72}

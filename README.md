@@ -49,7 +49,7 @@ The data comes from OpenStreetMap, so some places lack hours, phone numbers or s
 
 ## Notes
 - Ratings are from TT Eats visitors, not Google, since Google's rating data isn't available for free.
-- After changing site files, change `tt-eats-v5` in `sw.js` to `v6` so phones fetch the update.
+- After changing site files, change `tt-eats-v6` in `sw.js` to `v7` so phones fetch the update.
 
 ## Keeping the list accurate (overrides.json)
 `overrides.json` lets you correct the list yourself, and changes show immediately. Edit it on GitHub like any file:

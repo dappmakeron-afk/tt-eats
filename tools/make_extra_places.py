@@ -18,9 +18,24 @@ def label(cat):
     c = re.sub(r"_(restaurant|shop|place)$", "", cat or "restaurant").replace("_", " ").strip()
     return (c or "restaurant").capitalize()
 
-gj = json.load(open("tt_places.geojson", encoding="utf-8"))
+import os, sys
+
+def find_file():
+    name = sys.argv[1] if len(sys.argv) > 1 else "tt_places.geojson"
+    here = os.path.dirname(os.path.abspath(__file__)); home = os.path.expanduser("~")
+    for d in (os.getcwd(), here, os.path.dirname(here), os.path.dirname(os.path.dirname(here)), home,
+              os.path.join(home, "Downloads"), os.path.join(home, "Documents")):
+        path = os.path.join(d, name)
+        if os.path.isfile(path): return path
+    sys.exit("Could not find tt_places.geojson. Copy it into the same folder as this script, or run:\n"
+             "python make_extra_places.py C:\\full\\path\\to\\tt_places.geojson")
+
+path = find_file(); print("Reading", path)
+txt = open(path, encoding="utf-8").read()
+try: feats = json.loads(txt)["features"]
+except Exception: feats = [json.loads(l.lstrip("\x1e")) for l in txt.splitlines() if l.strip().lstrip("\x1e").startswith("{")]
 out, skipped = [], {"not food": 0, "closed": 0, "low confidence": 0, "outside TT": 0, "no name": 0}
-for f in gj["features"]:
+for f in feats:
     p = f.get("properties", {}); g = f.get("geometry") or {}
     if g.get("type") != "Point": continue
     lo, la = g["coordinates"][:2]
@@ -47,4 +62,4 @@ for f in gj["features"]:
            "p": phones[0] if phones else "", "w": web, "f": fb, "i": ig, "s": "o"}
     out.append({k: v for k, v in rec.items() if v != ""})
 json.dump(out, open("extra-places.json", "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
-print("Kept", len(out), "restaurants. Skipped:", skipped)
+print("Saved", os.path.abspath("extra-places.json")); print("Kept", len(out), "restaurants. Skipped:", skipped)
