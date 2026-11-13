@@ -1,5 +1,5 @@
 {
-  "hide": ["n4480953689"],
-  "fix": {},
+  "hide": ["n4480953689", "w561304393", "w390253328", "n4610764491", "w230904132", "n7935257986", "w390333405", "n11447470870", "w386521898", "w390315440", "w390069185", "n1327394048", "w390332652", "w390156457", "n1594983320", "w449451925", "w386635176", "w390075669", "n3903501369", "w390253332", "n4485430692", "w391227607"],
+  "fix": {"n4581043891": {"n": "AAA BBQ & Grille", "a": "Caparo Main Rd"}, "n3944623641": {"n": "Shaolin Chinese Restaurant"}, "w390270040": {"n": "Ayesha's Local and Spanish Cuisine", "c": "regional"}, "w386565362": {"n": "TipsyCrown Tobago"}, "n1317992751": {"n": "Ar Riyadh Restaurant"}, "n4485429891": {"n": "Al Haaq BBQ"}, "n2525365939": {"n": "Zareen's Asian & Indian Cuisine"}, "w389958907": {"n":"Aradous Cuisine"}},
   "add": [{"id": "x1480953690", "n": "Enchanted Cafe", "c": "restaurant", "la": 10.431678, "lo": -61.453412, "a": "Southern Main Rd, Couva", "p": "868-717-9333", "h": "Mo-Th 08:00-19:00, Fr-Sa 08:00-20:00, Su 08:00-15:00", "i": "https://www.instagram.com/enchantedcafe1/"}]
 }
