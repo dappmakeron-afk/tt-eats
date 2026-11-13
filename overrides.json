@@ -1,5 +1,5 @@
 {
-  "hide": [],
+  "hide": ["n4480953689"],
   "fix": {},
-  "add": []
+  "add": [{"id": "n4480953690", "n": "Enchanted Cafe", "c": "restaurant", "la": 10.431678, "lo": -61.453412, "a": "Southern Main Rd, Couva", "p": "868-717-9333", "h": "Mo-Th 08:00-19:00, Fr-Sa 08:00-20:00, Su 08:00-15:00", "i": "https://www.instagram.com/enchantedcafe1/"}]
 }
