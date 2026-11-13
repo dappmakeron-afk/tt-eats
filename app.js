@@ -10,7 +10,7 @@ function nowTT(){const p=new Intl.DateTimeFormat('en-US',{timeZone:'America/Port
 function parseOH(s){
  if(!s)return null;s=s.trim();const w=Array.from({length:7},()=>[]);
  if(/^24\/7$/i.test(s)){w.forEach(x=>x.push([0,1440]));return w}
- for(let part of s.split(';')){part=part.trim();if(!part||/^(PH|SH)\b/i.test(part))continue;
+ for(let part of s.split(/;|(?<=\d),\s*(?=[A-Za-z])/)){part=part.trim();if(!part||/^(PH|SH)\b/i.test(part))continue;
   const m=part.match(/^([A-Za-z,\- ]*?)\s*(off|closed|\d{1,2}:\d{2}\s*-\s*\d{1,2}:\d{2}(?:\s*,\s*\d{1,2}:\d{2}\s*-\s*\d{1,2}:\d{2})*)$/i);if(!m)return null;
   let days=[];const ds=m[1].trim();
   if(!ds)days=[0,1,2,3,4,5,6];else for(const x of ds.split(',')){const r=x.trim().split('-').map(y=>DK.indexOf(y.trim()));if(r.includes(-1))return null;if(r.length===1)days.push(r[0]);else for(let i=r[0];;i=(i+1)%7){days.push(i);if(i===r[1])break}}
@@ -99,7 +99,7 @@ function init(){
  $('#close').onclick=()=>$('#dlg').close();
  $('#near').onclick=()=>{if(!navigator.geolocation)return say('This browser cannot share your location.',1);say('Finding your location…');
   navigator.geolocation.getCurrentPosition(p=>{me={lat:p.coords.latitude,lng:p.coords.longitude};$('#sort').querySelector('[value=near]').disabled=false;$('#sort').value='near';$('#area').value='';lim=60;render()},
-   ()=>say('Location is blocked. Allow location access in your browser settings, then tap Near me again.',1),{enableHighAccuracy:true,timeout:15000})};
+   e=>say(e.code===1?'Location is blocked for this site. Click the icon at the left of the address bar, set Location to Allow, then tap Near me again.':e.code===2?'Your device could not work out where you are. Turn on Location services in your device settings, then tap Near me again.':'Finding your location took too long. Tap Near me again, or pick a location from the list.',1),{enableHighAccuracy:false,timeout:20000,maximumAge:300000})};
  addEventListener('online',()=>{net();loadData()});addEventListener('offline',net);net();
  if('serviceWorker'in navigator)navigator.serviceWorker.register('sw.js');
  fetch('overrides.json').then(r=>r.json()).then(o=>{ov=Object.assign(ov,o);if(ALL.length)ready()}).catch(()=>{});

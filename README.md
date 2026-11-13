@@ -49,7 +49,7 @@ The data comes from OpenStreetMap, so some places lack hours, phone numbers or s
 
 ## Notes
 - Ratings are from TT Eats visitors, not Google, since Google's rating data isn't available for free.
-- After changing site files, change `tt-eats-v6` in `sw.js` to `v7` so phones fetch the update.
+- After changing site files, change `tt-eats-v8` in `sw.js` to `v9` so phones fetch the update.
 
 ## Keeping the list accurate (overrides.json)
 `overrides.json` lets you correct the list yourself, and changes show immediately. Edit it on GitHub like any file:
@@ -62,7 +62,7 @@ The data comes from OpenStreetMap, so some places lack hours, phone numbers or s
 ```
 - `hide`: IDs of places that don't exist or are closed. Tap the restaurant and copy the ID shown under its details (for example `w384248420`). Put it in quotes: `"hide": ["w384248420"]`. A plain number also works, but the full ID is safer.
 - `fix`: change a field for one place: `n` name, `c` food type, `a` address, `p` phone, `h` hours, `w` website, `f` Facebook, `i` Instagram, `wa` WhatsApp link.
-- `add`: a restaurant missing from the map. `id` must be unique and start with `x`; `la`/`lo` are the coordinates from Google Maps (right-click the spot).
+- `add`: a restaurant missing from the map. `id` must be unique and start with `x` (for example `x1`, `x2`); `la`/`lo` are the coordinates from Google Maps (right-click the spot).
 - Better long term: fix the problem on OpenStreetMap itself (the "Fix it" link), so it is corrected for everyone.
 
 The site also automatically ignores anything outside Trinidad and Tobago and merges duplicate listings of the same place.

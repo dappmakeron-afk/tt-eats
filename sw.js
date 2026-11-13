@@ -1,4 +1,4 @@
-const V='tt-eats-v6',A=['./','index.html','style.css','app.js','config.js','overrides.json','extra-places.json','manifest.json','icons/icon.svg'];
+const V='tt-eats-v8',A=['./','index.html','style.css','app.js','config.js','overrides.json','extra-places.json','manifest.json','icons/icon.svg'];
 self.addEventListener('install',e=>{e.waitUntil(caches.open(V).then(c=>c.addAll(A)));self.skipWaiting()});
 self.addEventListener('activate',e=>e.waitUntil(caches.keys().then(k=>Promise.all(k.filter(x=>x!==V).map(x=>caches.delete(x))))));
 self.addEventListener('fetch',e=>{
