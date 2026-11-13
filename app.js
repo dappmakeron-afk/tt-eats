@@ -27,7 +27,8 @@ let DATA=[],EX=[],ov={hide:[],fix:{},add:[]};
 function build(){
  const hid=new Set(ov.hide.map(String)),seen={},out=[],dflt={a:'',p:'',h:'',w:'',f:'',i:'',wa:'',d:'',c:'Restaurant'};
  ALL.concat(ov.add.map(r=>Object.assign({},dflt,r)),EX.map(r=>Object.assign({},dflt,r)))
-  .filter(r=>inTT(r.la,r.lo)&&!hid.has(r.id)&&!hid.has(r.id.slice(1)))
+  .map(r=>r&&Object.assign({},r,{id:String(r.id),n:String(r.n),la:+r.la,lo:+r.lo}))
+  .filter(r=>r&&r.id!=='undefined'&&r.n&&isFinite(r.la)&&isFinite(r.lo)&&inTT(r.la,r.lo)&&!hid.has(r.id)&&!hid.has(r.id.slice(1)))
   .map(r=>Object.assign({},r,ov.fix[r.id]||ov.fix[r.id.slice(1)]||{},{ar:areaOf(r.la,r.lo)}))
   .forEach(r=>{let k=r.n.toLowerCase().replace(/[^a-z0-9]/g,'');const k2=k.replace(/restaurant|cafe|grill|bar|the|and/g,'');if(k2)k=k2;const a=seen[k]=seen[k]||[];if(a.some(x=>km(x.la,x.lo,r.la,r.lo)<0.1))return;a.push(r);out.push(r)});
  DATA=out}
@@ -102,7 +103,12 @@ function init(){
    e=>say(e.code===1?'Location is blocked for this site. Click the icon at the left of the address bar, set Location to Allow, then tap Near me again.':e.code===2?'Your device could not work out where you are. Turn on Location services in your device settings, then tap Near me again.':'Finding your location took too long. Tap Near me again, or pick a location from the list.',1),{enableHighAccuracy:false,timeout:20000,maximumAge:300000})};
  addEventListener('online',()=>{net();loadData()});addEventListener('offline',net);net();
  if('serviceWorker'in navigator)navigator.serviceWorker.register('sw.js');
- fetch('overrides.json').then(r=>r.json()).then(o=>{ov=Object.assign(ov,o);if(ALL.length)ready()}).catch(()=>{});
- fetch('extra-places.json').then(r=>r.json()).then(o=>{if(Array.isArray(o)){EX=o;if(ALL.length)ready()}}).catch(()=>{});
+ const st={},stat=()=>{$('#ovs').textContent=[st.o,st.x].filter(Boolean).join(' ')};
+ fetch('overrides.json').then(r=>{if(!r.ok)throw'file not found';return r.json()}).then(o=>{
+  ov=Object.assign(ov,o);ov.hide=[].concat(ov.hide||[]);ov.add=[].concat(ov.add||[]);ov.fix=ov.fix||{};
+  st.o='Your changes loaded: '+ov.hide.length+' hidden, '+ov.add.length+' added.';
+  if(ALL.length){ready();const n=ov.add.filter(x=>DATA.some(r=>r.id===String(x.id))).length;st.o+=' '+n+' of '+ov.add.length+' added places are in the list.'}
+ }).catch(e=>{st.o='overrides.json problem: '+String(e&&e.message||e)+'. Your hide and add changes are not applied.'}).finally(stat);
+ fetch('extra-places.json').then(r=>r.ok?r.json():null).then(o=>{if(Array.isArray(o)&&o.length){EX=o;st.x='Extra places loaded: '+o.length+'.';if(ALL.length)ready()}}).catch(e=>{st.x='extra-places.json problem: '+String(e&&e.message||e)+'.'}).finally(stat);
  loadData();loadRT()}
 init();

@@ -1,5 +1,7 @@
 # TT Eats – Trinidad & Tobago restaurant directory
 
+**Updating tip:** your own data lives in `overrides.json` and `extra-places.json` at the top level of your repository. Never overwrite those two files when you upload a new version of the site. The `starter-data` folder has empty copies for a first-time setup only: copy `overrides.json` and `extra-places.json` out of it into the top level, once.
+
 Free restaurant directory with a "Near me" button, filters for location, food type and "Open now", visitor ratings and comments, phone and social links, and Google Maps directions. It works offline after the first visit.
 
 ## Everything here is free
@@ -49,7 +51,7 @@ The data comes from OpenStreetMap, so some places lack hours, phone numbers or s
 
 ## Notes
 - Ratings are from TT Eats visitors, not Google, since Google's rating data isn't available for free.
-- After changing site files, change `tt-eats-v8` in `sw.js` to `v9` so phones fetch the update.
+- After changing site files, change `tt-eats-v10` in `sw.js` to `v11` so phones fetch the update.
 
 ## Keeping the list accurate (overrides.json)
 `overrides.json` lets you correct the list yourself, and changes show immediately. Edit it on GitHub like any file:
@@ -76,3 +78,6 @@ Overture Maps is a free open dataset that often lists places OpenStreetMap is mi
 4. Run: `python make_extra_places.py`. It prints how many restaurants it kept and creates `extra-places.json`.
 5. Upload `extra-places.json` to the top level of your repository, replacing the empty one.
 Places already found on OpenStreetMap are not repeated. To remove a wrong one, copy its ID from the details and add it to `hide`.
+
+## Checking your changes loaded
+The small line at the very bottom of the site (above the credits) says how many changes were loaded from `overrides.json`, and how many of your added places made it into the list. If it reports a problem, the message says what to fix.
