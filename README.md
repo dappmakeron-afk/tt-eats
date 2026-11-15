@@ -1,4 +1,6 @@
 # TT Eats – Trinidad & Tobago restaurant directory
+Live now: https://dappmakeron-afk.github.io/tt-eats/
+
 
 **Updating tip:** your own data lives in `overrides.json` and `extra-places.json` at the top level of your repository. Never overwrite those two files when you upload a new version of the site. The `starter-data` folder has empty copies for a first-time setup only: copy `overrides.json` and `extra-places.json` out of it into the top level, once.
 
